@@ -218,7 +218,34 @@ async function mintCoin(
 }
 ```
 
+## 与钱包相关操作
+```
+// Establish connection to the wallet
+const result = await (window as any).aptos.connect()
 
+// Check connection status of wallet
+const status = await (window as any).aptos.isConnected()
+
+// Gets the address of the account signed into the wallet
+const accountAddress = await (window as any).aptos.account()
+
+// Create a transaction
+const transaction = {
+    type: 'script_function_payload',
+    function: '0x1::coin::transfer',
+    type_arguments: ['0x1::aptos_coin::AptosCoin'],
+    arguments: [receiverAddress, amount]
+}
+
+// Send transaction to the extension to be signed and submitted to chain
+const response = await (window as any).aptos.signAndSubmitTransaction(transaction)
+
+// Send transaction to the extension to be signed and returns
+const signedTransaction = await (window as any).aptos.signTransaction(transaction)
+
+// Disconnect dApp from the wallet
+await (window as any).aptos.disconnect(transaction)
+```
 
 
 
