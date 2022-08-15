@@ -16,6 +16,15 @@ export const FAUCET_URL = "https://faucet.devnet.aptoslabs.com";
 const faucetClient = new FaucetClient(NODE_URL, FAUCET_URL);
 ```
 
+## 新建账户
+```
+const alice = new AptosAccount();
+const address = alice.address();
+const priKeyObj = alice.toPrivateKeyObject();
+const publicKey = priKeyObj.publicKeyHex;
+const privateKey = priKeyObj.privateKeyHex;
+```
+
 ## 根据私钥获取账户对象
 ```
 const privateKeyHexToAccount = (hexString: string): AptosAccount =>
